@@ -5,5 +5,9 @@
 {% endblock %}
 
 {% block content %}
-	<h1 class="mt-4">Hello world</h1>
+	<h1 class="mt-4">Posts page</h1>
+
+	{% for post in posts %}
+		<p><a href="{% url 'detail_page' id=post.id %}">{{ post.title }}</a></p>
+	{% endfor %}
 {% endblock %}
