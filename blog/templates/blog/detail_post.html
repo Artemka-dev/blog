@@ -12,7 +12,7 @@
 		Описание поста здесь: <a href="{{ post.files.url }}">{{ post.files.url }}</a>
 	{% endif %}
 	<br/>
-	<img src="{{ post.picture.url }}" width="500px" height="auto" alt=""><br/>
+	<img src="{{ post.picture.url }}" width="500px" height="auto" alt="Нет картинки"><br/>
 	<a href="{% url 'change_page' id=post.id %}">Изменить пост</a><br/>
 	<a href="{% url 'delete_post' id=post.id %}">Удалить пост</a>
 {% endblock %}

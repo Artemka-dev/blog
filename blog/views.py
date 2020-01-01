@@ -36,9 +36,9 @@ class CreatePost(View):
 		if bound_form.is_valid():
 			new_post = bound_form.save()
 			return redirect("home_page")
-		else:
-			error = "Невозможно создать пост"
-			return render(request, "blog/create_post.html", context={"error": error, "form": bound_form})
+
+		error = "Невозможно создать пост"
+		return render(request, "blog/create_post.html", context={"error": error, "form": bound_form})
 
 class ChangePost(View):
 
