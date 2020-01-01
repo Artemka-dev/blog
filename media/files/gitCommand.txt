@@ -1,0 +1,22 @@
+Создаем удаленный репозиторий
+git init
+git config --global user.name "Artemka-dev" - создаем автора коммитов
+git config --global user.email "artemka_pro@inbox.ru" - создаем автора коммитов
+git status - статус проекта
+git add --all - добавить все
+git commit -m "<Message>" - создаем коммит с коментарием
+
+чтобы залить изменения куда-то это нам необходимо добавить
+git remote add <name_of_repository> <link>
+git remote - смотрим все удаленные репозитории
+git push <name_of_repository> master(основная ветка нашего проекта) - заливаем все
+и после этого можем проверять репозиторий
+
+git tag "version_1.0" - добавляем тэг версию
+git branch <branch_name> - создаем ветку для того, чтобы не изменять главную ветку если что-то поломается
+git branch -m <old_name> <new_name> - переименовываем ветку
+git branch - проверяем какие есть ветки
+git checkout <branch_name> - переключение на другую ветку
+git merge <другую ветку>(с кем хотим слиться) - в главную ветку проекта мы заносим изменения с другой ветки
+git branch -D <branch_name> - удаление ветки которая не нужна
+git log - история изменений
