@@ -1,0 +1,21 @@
+{% extends "blog/base_app.html" %}
+
+{% block title %}
+	Create Post - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+	{% load crispy_forms_tags %}
+
+	<div class="container col-6">
+		<h1 class="mt-5 mb-5">Создание поста</h1>
+		<form action="{% url 'create_page' %}" method="post">
+			{% csrf_token %}
+
+			{% include "include/alert.html" %}
+
+			{{ form|crispy }}
+			<button class="btn btn-light">Создать пост</button>
+		</form>
+	</div>
+{% endblock %}

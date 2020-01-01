@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-	<h2 align="center">Post - {{ post.title }}</h2>
+	<h2 class="mt-5">Post - {{ post.title }}</h2>
 
-	<p align="center">{{ post.body }}</p>
+	<p>{{ post.body }}</p>
+	<a href="{% url 'change_page' id=post.id %}">Изменить пост</a><br/>
+	<a href="{% url 'delete_post' id=post.id %}">Удалить пост</a>
 {% endblock %}

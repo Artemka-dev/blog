@@ -1,0 +1,21 @@
+{% extends "blog/base_app.html" %}
+
+{% block title %}
+	Change Post "{{ post.title }}" - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+	{% load crispy_forms_tags %}
+
+	<div class="container col-6">
+		<h1 class="mt-5 mb-5">Изменение поста</h1>
+		<form action="{% url 'change_page' id=post.id %}" method="post">
+			{% csrf_token %}
+
+			{% include "include/alert.html" %}
+
+			{{ form|crispy }}
+			<button class="btn btn-light">Пересоздать пост</button>
+		</form>
+	</div>
+{% endblock %}

@@ -6,8 +6,18 @@
 
 {% block content %}
 	<h1 class="mt-4">Posts page</h1>
+	<a href="{% url 'create_page' %}">Создать пост</a>
 
 	{% for post in posts %}
-		<p><a href="{% url 'detail_page' id=post.id %}">{{ post.title }}</a></p>
+		<div class="card mb-3">
+			<!-- <img src="https://s1.1zoom.me/big3/147/Waterfalls_Summer_Rivers_Rays_of_light_563524_2800x1874.jpg" class="card-img-top" alt="..."> -->
+			<img src="" alt="" class="card-img-top">
+			<div class="card-body">
+				<h5 class="card-title">{{ post.title }}</h5>
+				<p class="card-text">{{ post.body }}</p>
+				<p class="card-text"><small class="text-muted">{{ post.date_pub }}</small></p>
+				<a href="{% url 'detail_page' id=post.id %}">Подробнее...</a>
+			</div>
+		</div>
 	{% endfor %}
 {% endblock %}
