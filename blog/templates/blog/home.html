@@ -11,7 +11,7 @@
 	{% for post in posts %}
 		<div class="card mb-3">
 			<!-- <img src="https://s1.1zoom.me/big3/147/Waterfalls_Summer_Rivers_Rays_of_light_563524_2800x1874.jpg" class="card-img-top" alt="..."> -->
-			<img src="" alt="" class="card-img-top">
+			<img src="{{ post.picture.url }}" alt="hj" class="card-img-top">
 			<div class="card-body">
 				<h5 class="card-title">{{ post.title }}</h5>
 				<p class="card-text">{{ post.body }}</p>

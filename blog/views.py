@@ -31,7 +31,7 @@ class CreatePost(View):
 		return render(request, "blog/create_post.html", context={"form": form})
 
 	def post(self, request):
-		bound_form = PostForm(request.POST)
+		bound_form = PostForm(request.POST, request.FILES)
 
 		if bound_form.is_valid():
 			new_post = bound_form.save()
@@ -50,7 +50,7 @@ class ChangePost(View):
 
 	def post(self, request, id):
 		post = Post.objects.get(id=id)
-		bound_form = PostForm(request.POST, instance=post)
+		bound_form = PostForm(request.POST, request.FILES, instance=post)
 
 		if bound_form.is_valid():
 			update = bound_form.save()

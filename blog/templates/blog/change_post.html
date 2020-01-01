@@ -9,7 +9,7 @@
 
 	<div class="container col-6">
 		<h1 class="mt-5 mb-5">Изменение поста</h1>
-		<form action="{% url 'change_page' id=post.id %}" method="post">
+		<form action="{% url 'change_page' id=post.id %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 
 			{% include "include/alert.html" %}
