@@ -4,6 +4,9 @@ from django.views.generic import View, TemplateView
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 import os
 
 # Create your views here.
@@ -44,7 +47,7 @@ class DetailPage(View):
 			error = "Произошла ошибка при создании комментария"
 			return render(request, "blog/detail_post.html", context={"comments": comments, "post": post, "error": error, "form": bound_form})
 
-class CreatePost(View):
+class CreatePost(LoginRequiredMixin, View):
 	
 	def get(self, request):
 		form = PostForm()
@@ -61,7 +64,7 @@ class CreatePost(View):
 		error = "Невозможно создать пост"
 		return render(request, "blog/create_post.html", context={"error": error, "form": bound_form})
 
-class ChangePost(View):
+class ChangePost(LoginRequiredMixin, View):
 
 	def get(self, request, id):
 		post = Post.objects.get(id=id)
@@ -80,17 +83,20 @@ class ChangePost(View):
 			error = "Невозможно пересоздать пост"
 			return render(request, "blog/create_post.html", context={"form": bound_form, "error": error, "post": post})
 
-
+@login_required
 def delete_post(request, id):
 	post = Post.objects.get(id=id)
 	post.delete()
 	return redirect("home_page")
 
+
+@login_required
 def like(request, id_comment, id_post):
 	comment = get_object_or_404(Comment, id=id_comment)
 	post = get_object_or_404(Post, id=id_post)
 
 	comment.likes += 1
 	comment.save()
+	
 	return redirect("detail_page", id=id_post)
 

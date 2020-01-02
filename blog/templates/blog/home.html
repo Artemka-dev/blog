@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<h1 align="center" class="mt-5 mb-5">Страница постов <a type="submit" class="btn btn-dark" href="{% url 'create_page' %}">Создать пост</a></h1>
+	<h1 align="center" class="mt-5 mb-5">Страница постов {% if request.user.is_authenticated %}<a type="submit" class="btn btn-dark" href="{% url 'create_page' %}">Создать пост</a>{% endif %}</h1>
 
 	{% for post in posts %}
 
