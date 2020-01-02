@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View, TemplateView
 
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 import os
 
@@ -21,11 +21,28 @@ class HomePage(TemplateView):
 class DetailPage(View):
 
 	def get(self, request, id):
+		form = CommentForm()
+
 		post = get_object_or_404(Post, id=id)
+		comments = post.comments.all()
 		post.views += 1
 		post.save()
-		return render(request, "blog/detail_post.html", context={"post": post})
+		return render(request, "blog/detail_post.html", context={"comments": comments, "post": post, "form": form})
 
+	def post(self, request, id):
+		bound_form = CommentForm(request.POST)
+		post = get_object_or_404(Post, id=id)
+		comments = post.comments.all()
+
+		if bound_form.is_valid():
+			new_comment = bound_form.save()
+			post.comments.add(new_comment)
+
+			return redirect("detail_page", id=post.id)
+
+		else:
+			error = "Произошла ошибка при создании комментария"
+			return render(request, "blog/detail_post.html", context={"comments": comments, "post": post, "error": error, "form": bound_form})
 
 class CreatePost(View):
 	
@@ -68,4 +85,12 @@ def delete_post(request, id):
 	post = Post.objects.get(id=id)
 	post.delete()
 	return redirect("home_page")
+
+def like(request, id_comment, id_post):
+	comment = get_object_or_404(Comment, id=id_comment)
+	post = get_object_or_404(Post, id=id_post)
+
+	comment.likes += 1
+	comment.save()
+	return redirect("detail_page", id=id_post)
 

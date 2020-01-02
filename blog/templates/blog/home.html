@@ -13,7 +13,7 @@
 			<img style="opacity: 0.8;" src="{{ post.picture.url }}" class="card-img" alt="...">
 			<div class="card-img-overlay">
 				<h5 class="card-title card-font">{{ post.title }}</h5>
-				<p style="opacity: 0.75;" class="card-text card-font"><em>{{ post.body|truncatewords:50 }}</em></p>
+				<p style="opacity: 0.95;" class="card-text card-font"><em>{{ post.body|truncatewords:50 }}</em></p>
 				<a style="opacity: 0.6;" type="submit" class="btn btn-light mt-3" href="{% url 'detail_page' id=post.id %}">Узнать поподробнее</a>
 				
 

@@ -6,6 +6,8 @@
 
 {% block content %}
 
+	{% load crispy_forms_tags %}
+
 	<div class="detail__block">
 		<div class="container col-8">
 			<h2 class="mt-5">Post - {{ post.title }}</h2>
@@ -47,4 +49,55 @@
 
 		</div>
 	</div>
+
+
+	<button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#exampleModalCenter">
+		Создать комментарий
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Комментарий</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<form action="{% url 'detail_page' id=post.id %}" method="post">
+					<div class="modal-body">
+						{% csrf_token %}
+
+						{% include "include/alert.html" %}
+
+						{{ form|crispy }}
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-light">Создать</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	{% if comments %}
+		{% for comment in comments %}	
+			<div class="card mt-5 mb-5">
+				<h5 class="card-header">{{ comment.date_pub }}</h5>
+				<div class="card-body">
+					<h5 class="card-title">{{ comment.title }}</h5>
+					<p class="card-text">{{ comment.desc }}</p>
+				</div>
+				<div class="card-footer">
+					<a href="{% url 'like_page' id_comment=comment.id id_post=post.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i> {{ comment.likes }}</a>
+				</div>
+			</div>
+
+		{% endfor %}
+	{% else %}
+		<h5>Нет комментариев к этому посту!</h5>
+	{% endif %}
 {% endblock %}
