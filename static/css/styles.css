@@ -1,0 +1,49 @@
+* {
+	box-sizing: border-box;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.detail__block {
+	border: 1px solid silver;
+	border-radius: 10px;
+	padding: 30px;
+	margin-top: 5%;
+	width: 900px;
+	margin: 5% auto;
+	background: ghostwhite;
+
+	transition: 0.3s;
+
+	-webkit-box-shadow: 19px 21px 7px 0px rgba(49, 52, 50, 0.52);
+	-moz-box-shadow: 19px 21px 7px 0px rgba(49, 52, 50, 0.52);
+	box-shadow: 19px 21px 7px 0px rgba(49, 52, 50, 0.52);
+}
+
+.detail__block:hover {
+	transform: scale(1.05);
+}
+
+.date_pub {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	width: 100%;
+	line-height: 40px;
+}
+
+.card-font {
+	font-size: 23px;
+}
+
+.block {
+	transition: 0.3s;
+}
+
+.block:hover {
+	transform: scale(1.05);
+}
+

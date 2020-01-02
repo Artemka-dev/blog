@@ -5,19 +5,21 @@
 {% endblock %}
 
 {% block content %}
-	<h1 class="mt-4">Posts page</h1>
-	<a href="{% url 'create_page' %}">Создать пост</a>
+	<h1 align="center" class="mt-5 mb-5">Страница постов <a type="submit" class="btn btn-dark" href="{% url 'create_page' %}">Создать пост</a></h1>
 
 	{% for post in posts %}
-		<div class="card mb-3">
-			<!-- <img src="https://s1.1zoom.me/big3/147/Waterfalls_Summer_Rivers_Rays_of_light_563524_2800x1874.jpg" class="card-img-top" alt="..."> -->
-			<img src="{{ post.picture.url }}" alt="hj" class="card-img-top">
-			<div class="card-body">
-				<h5 class="card-title">{{ post.title }}</h5>
-				<p class="card-text">{{ post.body }}</p>
-				<p class="card-text"><small class="text-muted">{{ post.date_pub }}</small></p>
-				<a href="{% url 'detail_page' id=post.id %}">Подробнее...</a>
+
+		<div class="card bg-dark text-white mb-5 block">
+			<img style="opacity: 0.8;" src="{{ post.picture.url }}" class="card-img" alt="...">
+			<div class="card-img-overlay">
+				<h5 class="card-title card-font">{{ post.title }}</h5>
+				<p style="opacity: 0.7;" class="card-text card-font"><em>{{ post.body|truncatewords:50 }}</em></p>
+				<a style="opacity: 0.6;" type="submit" class="btn btn-light mt-3" href="{% url 'detail_page' id=post.id %}">Узнать поподробнее</a>
+				
+
+				<p class="card-text date_pub"><strong>Было опубликованно: </strong> {{ post.date_pub }}</p>
+				<p class="mt-4"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Количество просмотров: {{ post.views }}</strong></p>
 			</div>
 		</div>
-	{% endfor %}
+{% endfor %}
 {% endblock %}

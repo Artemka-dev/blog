@@ -4,6 +4,8 @@ from django.views.generic import View, TemplateView
 from .models import Post
 from .forms import PostForm
 
+import os
+
 # Create your views here.
 class HomePage(TemplateView):
 	template_name = "blog/home.html"
@@ -20,6 +22,8 @@ class DetailPage(View):
 
 	def get(self, request, id):
 		post = get_object_or_404(Post, id=id)
+		post.views += 1
+		post.save()
 		return render(request, "blog/detail_post.html", context={"post": post})
 
 

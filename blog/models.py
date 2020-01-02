@@ -8,6 +8,7 @@ class Post(models.Model):
 	date_pub = models.DateField(auto_now_add=True, blank=True, null=True)
 	picture = models.ImageField(upload_to="pictures/", null=True, blank=True, default='default/default.jpg')
 	files = models.FileField(upload_to="files/", default="")
+	views = models.IntegerField(default = 0)
 
 	def __str__(self):
 		return self.title
