@@ -92,6 +92,7 @@
 	{% endif %}
 
 	{% if comments %}
+		<h2 class="mt-3">Все отзывы <span class="badge badge-info">{{ post.comments.count }}</span></h2>
 		{% for comment in comments %}	
 			<div class="card mt-5 mb-5">
 				<h5 class="card-header">{{ comment.user }}, {{ comment.date_pub }}</h5>
