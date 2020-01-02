@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
 
-# Artemka judo367256
+# Artemka userArtemka234
 # Admin userAdmin123
 
 class PostForm(forms.ModelForm):

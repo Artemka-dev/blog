@@ -28,8 +28,12 @@
 					<a class="nav-link" href="{% url 'home_page' %}">Домашняя <span class="sr-only">(current)</span></a>
 				</li>
 
+				{% if request.user.is_authenticated %}
+					<li class="nav-item {% if active == 'change' %} active {% endif %}">
+						<a href="{% url 'change_page' %}" class="nav-link">Аккаунт</a>
+					</li>
+				{% endif %}
 				<li class="nav-item {% if active == 'login' %} active {% endif %}">
-					
 					{% if request.user.is_anonymous %}
 						<a class="nav-link" href="{% url 'login_page' %}">Вход <span class="sr-only">(current)</span></a>
 					{% else %}
