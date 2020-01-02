@@ -20,31 +20,34 @@
 			<p><img src="{{ post.picture.url }}" width="500px" height="auto" alt="Нет картинки"></p><br/>
 			
 			{% if request.user.is_authenticated %}
-				<a type="submit" class="btn btn-success" href="{% url 'change_page' id=post.id %}">Изменить пост</a>
+				{% if post.user == request.user %}
+					<a type="submit" class="btn btn-success" href="{% url 'change_page' id=post.id %}">Изменить пост</a>
 
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-					Удалить пост
-				</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+						Удалить пост
+					</button>
 
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-scrollable" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalScrollableTitle">Удаление поста</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<strong>Вы действительно хотите удалить пост "{{ post.title }}"????</strong>
-							</div>
-							<div class="modal-footer">
-								<a type="submit" class="btn btn-danger" href="{% url 'delete_post' id=post.id %}">Удалить пост</a>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-scrollable" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalScrollableTitle">Удаление поста</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<strong>Вы действительно хотите удалить пост "{{ post.title }}"????</strong>
+								</div>
+								<div class="modal-footer">
+									<a type="submit" class="btn btn-danger" href="{% url 'delete_post' id=post.id %}">Удалить пост</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				{% endif %}
 			{% endif %}
 
 			<p class="mt-3"><strong>Было опубликованно: </strong> {{ post.date_pub }}</p>
@@ -91,7 +94,7 @@
 	{% if comments %}
 		{% for comment in comments %}	
 			<div class="card mt-5 mb-5">
-				<h5 class="card-header">{{ comment.date_pub }}</h5>
+				<h5 class="card-header">{{ comment.user }}, {{ comment.date_pub }}</h5>
 				<div class="card-body">
 					<h5 class="card-title">{{ comment.title }}</h5>
 					<p class="card-text">{{ comment.desc }}</p>

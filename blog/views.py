@@ -38,7 +38,7 @@ class DetailPage(View):
 		comments = post.comments.all()
 
 		if bound_form.is_valid():
-			new_comment = bound_form.save()
+			new_comment = Comment.objects.create(user=request.user, title=bound_form.cleaned_data['title'], desc=bound_form.cleaned_data['desc'])
 			post.comments.add(new_comment)
 
 			return redirect("detail_page", id=post.id)
@@ -58,7 +58,7 @@ class CreatePost(LoginRequiredMixin, View):
 		bound_form = PostForm(request.POST, request.FILES)
 
 		if bound_form.is_valid():
-			new_post = bound_form.save()
+			new_post = Post.objects.create(user=request.user, title=bound_form.cleaned_data["title"], body=bound_form.cleaned_data['body'], files=bound_form.cleaned_data['files'], picture=bound_form.cleaned_data['picture'])
 			return redirect("home_page")
 
 		error = "Невозможно создать пост"
@@ -68,6 +68,8 @@ class ChangePost(LoginRequiredMixin, View):
 
 	def get(self, request, id):
 		post = Post.objects.get(id=id)
+		if post.user != request.user:
+			return redirect("detail_page", id=id)
 	
 		form = PostForm(instance=post)
 		return render(request, "blog/change_post.html", context={"form": form, "post": post})
@@ -77,7 +79,7 @@ class ChangePost(LoginRequiredMixin, View):
 		bound_form = PostForm(request.POST, request.FILES, instance=post)
 
 		if bound_form.is_valid():
-			update = bound_form.save()
+			update = bound_form.save(request.user)
 			return redirect("home_page")
 		else:
 			error = "Невозможно пересоздать пост"
@@ -86,7 +88,12 @@ class ChangePost(LoginRequiredMixin, View):
 @login_required
 def delete_post(request, id):
 	post = Post.objects.get(id=id)
+	if post.user != request.user:
+		return redirect("detail_page", id=id)
+
+	comments = post.comments.all()
 	post.delete()
+	comments.delete()
 	return redirect("home_page")
 
 
@@ -97,6 +104,6 @@ def like(request, id_comment, id_post):
 
 	comment.likes += 1
 	comment.save()
-	
+
 	return redirect("detail_page", id=id_post)
 

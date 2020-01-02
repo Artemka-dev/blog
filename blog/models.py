@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Post(models.Model):
+	user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
 	title = models.CharField("Название поста", max_length=100, unique=True, db_index=True)
 	body = models.TextField("Тело поста", db_index=True, blank=True)
@@ -19,6 +21,8 @@ class Post(models.Model):
 		ordering = ['-date_pub']
 
 class Comment(models.Model):
+	user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+
 	title = models.CharField("Название комментария", max_length=100)
 	desc = models.TextField("Описание комментария")
 	likes = models.IntegerField(default = 0)
