@@ -17,10 +17,10 @@
 					<h6 class="user card-font">{{ post.user }}</h6>
 
 					<p style="opacity: 0.95;" class="card-text card-font"><em>{{ post.body|truncatewords:40 }}</em></p>
-					<a style="opacity: 0.6;" type="submit" class="btn btn-light mt-3" href="{% url 'detail_page' id=post.id %}">Узнать поподробнее</a>
+					<a style="opacity: 0.6;" type="submit" class="btn btn-light mt-3 button" href="{% url 'detail_page' id=post.id %}">Узнать поподробнее</a>
 					
 					<p class="card-text date_pub"><strong>Было опубликованно: </strong> {{ post.date_pub }}</p>
-					<p class="mt-4"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Количество просмотров: {{ post.views }}</strong></p>
+					<p class="mt-4 views"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Количество просмотров: {{ post.views }}</strong></p>
 				</div>
 			</div>
 		{% endfor %}

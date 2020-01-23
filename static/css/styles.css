@@ -23,7 +23,7 @@ p {
 
 .date_pub {
 	position: absolute;
-	bottom: 5px;
+	bottom: 0;
 	left: 5px;
 	width: 100%;
 	line-height: 40px;
@@ -46,4 +46,44 @@ p {
 	top: 10px;
 	right: 10px;
 	text-decoration: underline;
+}
+
+@media screen and (max-width: 1000px) {
+	.card-font {
+		font-size: 13px;
+	}
+
+	.views, .date_pub {
+		font-size: 13px
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.card-font {
+		font-size: 10px;
+	}
+
+	.views, .date_pub {
+		font-size: 12px
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.card-font {
+		font-size: 8px;
+	}
+
+	.views, .date_pub {
+		font-size: 8px
+	}
+
+	.date_pub {
+		bottom: 0px;
+	}
+
+	.button {
+		width: 40%;
+		height: auto;
+		font-size: 8px;
+	}
 }
