@@ -17,20 +17,15 @@ class Post(models.Model):
 	def __str__(self):
 		return self.title
 
-	class Meta:
-		ordering = ['-date_pub']
 
 class Comment(models.Model):
 	user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
 	title = models.CharField("Название комментария", max_length=100)
 	desc = models.TextField("Описание комментария")
-	likes = models.IntegerField(default = 0)
 
 	date_pub = models.DateField(auto_now_add=True, blank=True, null=True)
 
 	def __str__(self):
 		return self.title
 
-	class Meta:
-		ordering = ['-date_pub']

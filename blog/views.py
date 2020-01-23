@@ -1,13 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, TemplateView
-
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+import os
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import TemplateView, View
 
-import os
+from .forms import CommentForm, PostForm
+from .models import Comment, Post
+
 
 # Create your views here.
 class HomePage(TemplateView):
@@ -95,15 +95,3 @@ def delete_post(request, id):
 	post.delete()
 	comments.delete()
 	return redirect("home_page")
-
-
-@login_required
-def like(request, id_comment, id_post):
-	comment = get_object_or_404(Comment, id=id_comment)
-	post = get_object_or_404(Post, id=id_post)
-
-	comment.likes += 1
-	comment.save()
-
-	return redirect("detail_page", id=id_post)
-

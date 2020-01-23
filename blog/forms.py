@@ -19,6 +19,8 @@ class PostForm(forms.ModelForm):
 		}
 
 		labels = {
+			"files": _("Выбрать файл"),
+			"picture": _("Выбрать картинку*"),
 			"title": _("Название"),
 			"body": _("Описание*")
 		}
